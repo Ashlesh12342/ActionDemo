@@ -30,7 +30,7 @@ jobs:
     # Sonar Login Token
         token: 9acf88f367bdb85bc72c2e370f9a885a929cf49e
     # Sonar Server url
-        url: http://http://3.216.9.117:9000/
+        url: http://3.216.9.117:9000/
     
     
     
