@@ -1,4 +1,4 @@
-name: push to ECR
+name: push to github packages
 
 on:
  push:
@@ -10,7 +10,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-   
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -20,31 +20,17 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B install --file pom.xml -DskipTests
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
-
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-
-    - name: Build, tag, and push image to Amazon ECR
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: themuskecr
-
-        IMAGE_TAG: springboot-backend
-      run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    
+    - name: Build and push
+      uses: docker/build-push-action@v1
+      with: 
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: ghcr.io
+        repository: ashlesh12342/actiondemo/springbootbackend
+        tags: ${{ github.run_number }}
 
     
-        
-
-      
 
      
 
