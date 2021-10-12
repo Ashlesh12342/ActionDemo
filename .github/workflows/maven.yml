@@ -17,20 +17,11 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: SonarQube Scanner Action
-  
-      uses: philips-software/sonar-scanner-action@v1.3.0
-      with:
-    # Sonar Project name
-        projectName: ashleshs
-    # Sonar Project Key
-        projectKey: ashleshs
-    # Project Base Directory
-        
-    # Sonar Login Token
-        token: 9acf88f367bdb85bc72c2e370f9a885a929cf49e
-    # Sonar Server url
-        url: http://3.216.9.117:9000/
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     
     
     
