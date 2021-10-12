@@ -21,6 +21,13 @@ jobs:
       run: mvn -B install --file pom.xml -DskipTests
     - name: Build image
       
-      run: docker build -t springbootbackend:1.0 .
+      username: ${{ secrets.username}}
+      password: ${{ secrets.password }}
+      registry: docker.io
+      repository: ashleshshrivastava29
+/
+actions
+      tags: ${{ github.run_number }}
+
       
     
