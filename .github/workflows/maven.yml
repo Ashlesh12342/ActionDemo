@@ -24,9 +24,7 @@ jobs:
       username: ${{ secrets.username}}
       password: ${{ secrets.password }}
       registry: docker.io
-      repository: ashleshshrivastava29
-/
-actions
+      repository: ashleshshrivastava29/actions
       tags: ${{ github.run_number }}
 
       
